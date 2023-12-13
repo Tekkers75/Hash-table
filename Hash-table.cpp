@@ -18,6 +18,20 @@ int main() {
     hashTable.Insert(20);
     hashTable.Insert(30);
     hashTable.Insert(40);
+    hashTable.Insert(10);
+    hashTable.Insert(20);
+    hashTable.Insert(30);
+    hashTable.Insert(40);
+    hashTable.Insert(10);
+    hashTable.Insert(20);
+    hashTable.Insert(30);
+    hashTable.Insert(40);
+    hashTable.Insert(10);
+    hashTable.Insert(20);
+    hashTable.Insert(30);
+    hashTable.Insert(40);
+
+
 
     hashTable.PrintTable();
 
@@ -27,12 +41,14 @@ int main() {
 
     // Удаляем элемент из хэш-таблицы
     hashTable.Delete(30);
+    hashTable.PrintTable();
 
     // Проверяем наличие удаленного элемента
     std::cout << "Element 30: " << (hashTable.Find(30) ? "Found" : "Not found") << std::endl;
 
     // Обновляем элемент в хэш-таблице
     hashTable.Update(20, 25);
+    hashTable.PrintTable();
 
     // Проверяем наличие обновленного элемента
     std::cout << "Element 20: " << (hashTable.Find(20) ? "Found" : "Not found") << std::endl;
@@ -41,9 +57,13 @@ int main() {
     // Очищаем хэш-таблицу
     hashTable.ClearList();
 
+    hashTable.PrintTable();
+
     // Проверяем наличие элементов после очистки
     std::cout << "Element 10: " << (hashTable.Find(10) ? "Found" : "Not found") << std::endl;
     std::cout << "Element 40: " << (hashTable.Find(40) ? "Found" : "Not found") << std::endl;
 
+
+    hashTable.PrintTable();
     return 0;
 }

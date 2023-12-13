@@ -14,7 +14,7 @@ private:
 	unsigned long (*hashFunction)(T key);
 
 public:
-	HashTable(int nbuckets, unsigned long (*hashf)(T key))
+	HashTable<T>(int nbuckets, unsigned long (*hashf)(T key))
         : numBuckets(nbuckets), hashFunction(hashf) {
         buckets.resize(numBuckets);
     }
@@ -63,7 +63,7 @@ public:
     void PrintTable() {
         for (int i = 0; i < numBuckets; ++i) {
             std::cout << "Bucket " << i << ": ";
-            buckets[i].printList();
+            buckets[i].print();
             std::cout << std::endl;
         }
     }
