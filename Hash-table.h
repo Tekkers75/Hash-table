@@ -1,72 +1,78 @@
-#pragma once
+//@author Саранчин К.А.
 #include <iostream>
-#include "LinkedList.h"
 #include <vector>
+#include "LinkedList.h"
 
 using namespace std;
+
 template <class T>
 class HashTable
 {
 private:
-	int numBuckets;
+    int numBuckets; // Число блоков
 
-	vector <LinkedList<T>> buckets;
-	unsigned long (*hashFunction)(T key);
+    vector <LinkedList<T>> buckets; // Хэш-таблица - вектор связанных списков
+
+    unsigned long (*hashFunction)(T key); // Указатель на хэш-функцию
 
 public:
-	HashTable<T>(int nbuckets, unsigned long (*hashf)(T key))
+    // Конструктор класса HashTable
+    HashTable<T>(int nbuckets, unsigned long (*hashf)(T key))
         : numBuckets(nbuckets), hashFunction(hashf) {
-        buckets.resize(numBuckets);
+        buckets.resize(numBuckets); // Инициализация вектора блока
     }
 
+    // Вставка элемента в хэш-таблицу
     void Insert(const T& key) {
         unsigned long hashValue = hashFunction(key);
-        int bucketIndex = hashValue % numBuckets;
-        buckets[bucketIndex].insert(key);
+        int bucketIndex = hashValue % numBuckets; // Вычисление индекса блоков
+        buckets[bucketIndex].insert(key); // Вставка элемента в блок
     }
 
+    // Поиск элемента в хэш-таблице
     bool Find(const T& key) {
         unsigned long hashValue = hashFunction(key);
-        int bucketIndex = hashValue % numBuckets;
-        return buckets[bucketIndex].search(key);
+        int bucketIndex = hashValue % numBuckets; // Вычисление индекса блоков
+        return buckets[bucketIndex].search(key); // Поиск элемента в блоке
     }
 
+    // Удаление элемента из хэш-таблицы
     void Delete(const T& key) {
         unsigned long hashValue = hashFunction(key);
-        int bucketIndex = hashValue % numBuckets;
-        buckets[bucketIndex].remove(key);
+        int bucketIndex = hashValue % numBuckets; // Вычисление индекса блоков
+        buckets[bucketIndex].remove(key); // Удаление элемента из блока
     }
 
+    // Очистка всех блоков хэш-таблицы
     void ClearList() {
         for (int i = 0; i < numBuckets; ++i) {
             buckets[i].clear();
         }
     }
 
+    // Обновление значения ключа в хэш-таблице
     void Update(const T& oldKey, const T& newKey) {
         unsigned long oldHashValue = hashFunction(oldKey);
-        int oldBucketIndex = oldHashValue % numBuckets;
+        int oldBucketIndex = oldHashValue % numBuckets; // Вычисление индекса старого блока
 
         unsigned long newHashValue = hashFunction(newKey);
-        int newBucketIndex = newHashValue % numBuckets;
+        int newBucketIndex = newHashValue % numBuckets; // Вычисление индекса нового блока
 
         if (oldBucketIndex == newBucketIndex) {
-            buckets[oldBucketIndex].update(oldKey, newKey);
+            buckets[oldBucketIndex].update(oldKey, newKey); // Обновление значения ключа в одном блоке
         }
         else {
-            buckets[oldBucketIndex].remove(oldKey);
-            buckets[newBucketIndex].insert(newKey);
+            buckets[oldBucketIndex].remove(oldKey); // Удаление старого ключа из старого блока
+            buckets[newBucketIndex].insert(newKey); // Вставка нового ключа в новый блок
         }
     }
 
-
+    // Вывод хэш-таблицы
     void PrintTable() {
         for (int i = 0; i < numBuckets; ++i) {
-            std::cout << "Bucket " << i << ": ";
+            cout << "Блок " << i << ": ";
             buckets[i].print();
-            std::cout << std::endl;
+            cout << endl;
         }
     }
-
-
 };
