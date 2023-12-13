@@ -5,6 +5,10 @@
 
 using namespace std;
 
+
+
+
+
 template <class T>
 class HashTable
 {
@@ -76,3 +80,8 @@ public:
         }
     }
 };
+
+//хэширование по последней цифре
+unsigned long SimpleHashFunction(int key) {
+    return key % 10;
+}

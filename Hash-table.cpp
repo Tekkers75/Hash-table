@@ -2,16 +2,13 @@
 
 #include <iostream>
 #include "Hash-table.h"
+#include "Test.h"
 
  // Пример хэш-функции для целых чисел
 //unsigned long HashInt(int key) {
 //    return static_cast<unsigned long>(key);
 //}
 
-//хэширование по последней цифре
-unsigned long SimpleHashFunction(int key) {
-    return key % 10; 
-}
 
 int main() {
     setlocale(LC_ALL, "rus");
@@ -57,7 +54,11 @@ int main() {
     std::cout << "Элемент 10: " << (hashTable.Find(10) ? "Найден" : "Не найден") << std::endl;
     std::cout << "Элемент 40: " << (hashTable.Find(40) ? "Найден" : "Не найден") << std::endl;
 
+    testHashTableInsert();
+    testHashTableDelete();
+    testHashTableClearList();
+    testHashTableUpdate();
 
-    hashTable.PrintTable();
+
     return 0;
 }
