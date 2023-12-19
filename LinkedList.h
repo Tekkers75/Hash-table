@@ -26,7 +26,7 @@ public:
     Node* next;
     Node* prev;
 
-    Node(int data) {
+    Node(T data) {
         this->data = data;
         next = nullptr;
         prev = nullptr;

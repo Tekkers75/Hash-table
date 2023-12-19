@@ -3,17 +3,30 @@
 #include <iostream>
 #include "Hash-table.h"
 #include "Test.h"
-
+#include <string>
  // Пример хэш-функции для целых чисел
 //unsigned long HashInt(int key) {
 //    return static_cast<unsigned long>(key);
 //}
 
 
+
 int main() {
     setlocale(LC_ALL, "rus");
     // Создаем хэш-таблицу с 5 блоками и хэш функцией
-    HashTable<int> hashTable(8, SimpleHashFunction);
+    HashTable<int> hashTable(8, IntHashFunc);
+
+    HashTable<string> hashTable1(8, Djbhash);
+
+    hashTable1.Insert("Иван");
+    hashTable1.Insert("Слава");
+    hashTable1.Insert("Костя");
+    hashTable1.Insert("Гена");
+    hashTable1.Insert("Андрей");
+    hashTable1.Insert("Илья");
+    hashTable1.Insert("Кирилл");
+    hashTable1.Insert("Алексей");
+    hashTable1.PrintTable();
 
     // Вставляем элементы в хэш-таблицу
     hashTable.Insert(11);
